@@ -1,0 +1,74 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:spring="http://www.springframework.org/tags">
+
+
+<jsp:output doctype-root-element="HTML"
+	doctype-system="about:legacy-compat" />
+ 
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+    
+<spring:theme code="styleSheet" var="app_css" />
+<spring:url value="/${app_css}" var="app_css_url" />
+<link rel="stylesheet" type="text/css" media="screen"
+	href="${app_css_url}" />
+
+<!-- Get the user locale from the page context (it was set by Spring MVC's locale resolver) -->
+<c:set var="userLocale">
+	<c:set var="plocale">${pageContext.response.locale}</c:set>
+	<c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
+</c:set>
+<title>Spring MVC - Book Application</title>
+
+
+<!-- jqGrid -->
+<spring:url value="/assets/scripts/jqgrid/js/jquery-1.7.2.min.js" var="jquery_url" />
+
+<spring:url value="/assets/scripts/jqgrid/css/ui.jqgrid.css" var="jqgrid_css" />
+
+<spring:url value="/assets/scripts/jqgrid/js/i18n/grid.locale-en.js" var="jqgrid_locale_url" />
+
+<spring:url value="/assets/scripts/jqgrid/js/jquery.jqGrid.min.js" var="jqgrid_url" />
+
+<spring:url value="/assets/css/styles.css" var="custom_css_url" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="${jqgrid_css}" />
+
+<script type="text/javascript" src="${jquery_url}"><jsp:text/></script>
+<script type="text/javascript" src="${jqgrid_locale_url}"><jsp:text/></script>
+<script type="text/javascript" src="${jqgrid_url}"><jsp:text/></script>
+
+<spring:theme code="styleSheet" var="app_css" />
+<spring:url value="/${app_css}" var="app_css_url" />
+<link rel="stylesheet" type="text/css" media="screen" href="${app_css_url}" />
+
+<link rel="stylesheet" type="text/css" href="${custom_css_url}"></link>	
+
+</head>
+	<body>	
+		<div id="wrapper">
+	  	<tiles:insertAttribute name="header" ignore="true" />
+	  	<table>
+	  		<tr>
+	  			<td><tiles:insertAttribute name="menu" ignore="true" /></td>
+	  			<td><tiles:insertAttribute name="body" ignore="true"/></td>
+	  		</tr>
+	  		<tr>
+	  			<td></td>
+	  			<td><tiles:insertAttribute name="footer" ignore="true" /></td>
+	  		</tr>
+	  	</table>
+	 	</div>
+	</body>
+
+</html>

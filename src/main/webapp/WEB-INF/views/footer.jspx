@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div class="footer" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:joda="http://www.joda.org/joda/time/tags"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+
+	<spring:message code="language" var="language" />
+	<spring:message code="english" var="english" />
+	<spring:message code="catalan" var="catalan" />
+	<spring:message code="theme" var="theme" />
+	<spring:message code="standard" var="standard" />
+	<spring:message code="green" var="green" />
+	<spring:message code="developer" var="developer" />
+	<spring:message code="golden" var="golden" />
+	<spring:message code="frog" var="frog" />
+	<spring:message code="home" var="home" />
+
+
+	<footer>
+		<hr />
+	
+		<table class=".footer-menu" border="0">
+
+			<tr>
+				<td>
+				<div class="menu-list">
+					<ul style="padding-left: 0;">
+						<li style="padding-left: 0;"><a href="/springproj05/books">${home}</a></li>
+					</ul>
+					</div>
+				</td>
+				
+			
+				<td>
+					<div class="menu-list">
+						<ul >							
+							<li style="padding-left: 0;"><h4>${language}</h4></li>
+
+							<c:if test="${not empty formNotify}">
+								<li><a href="?form&amp;lang=en_US">${english}</a></li>
+								<li><a href="?form&amp;lang=cat_CAT">${catalan}</a></li>
+							</c:if>
+							<c:if test="${empty formNotify}">
+								<li><a href="?lang=en_US">${english}</a></li>
+								<li><a href="?lang=cat_CAT">${catalan}</a></li>
+							</c:if>
+
+						</ul>
+					</div>
+				</td>
+
+				<td>
+					<div class="menu-list">
+						<ul>
+							<li><h4>${theme}</h4></li>
+							<c:if test="${not empty formNotify}">
+								<li><a href="?form&amp;theme=theme_frog">${frog}</a></li>
+								<li><a href="?form&amp;theme=theme_golden">${golden}</a></li>
+							</c:if>
+							<c:if test="${empty formNotify}">
+								<li><a href="?theme=theme_frog">${frog}</a></li>
+								<li><a href="?theme=theme_golden">${golden}</a></li>
+
+							</c:if>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<div class="footer-menu"></div>
+
+		<h4>${developer}</h4>
+	</footer>
+</div>

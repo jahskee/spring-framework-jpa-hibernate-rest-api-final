@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:joda="http://www.joda.org/joda/time/tags"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:message code="book_listing" var="bookListing" />
+	<spring:message code="book_information" var="bookInformation" />
+	<spring:message code="id" var="id" />
+	<spring:message code="category_name" var="categoryName" />
+	<spring:message code="isbn" var="isbn" />
+	<spring:message code="title" var="title" />
+	<spring:message code="publisher" var="publisher" />
+	<spring:message code="price" var="price" />
+
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					$("#book-list").jqGrid(
+							{
+								url : '/springproj05/books/listgrid',
+								datatype : 'json',
+								mtype : 'GET',
+								colNames : [ '${id}', '${categoryName}',
+										'${isbn}', '${title}', '${publisher}',
+										'${price}' ],
+								colModel : [ {
+									name : 'id',
+									index : 'id',
+									width : 50
+								}, {
+									name : 'categoryName',
+									index : 'categoryName',
+									width : 200
+								}, {
+									name : 'isbn',
+									index : 'isbn',
+									width : 110
+								}, {
+									name : 'title',
+									index : 'title',
+									width : 450
+
+								}, {
+									name : 'publisher',
+									index : 'publisher',
+									width : 150
+
+								}, {
+									name : 'price',
+									index : 'price',
+									width : 100
+
+								} ],
+								jsonReader : {
+									root : "booktData",
+									page : "currentPage",
+									total : "totalPages",
+									records : "totalRecords",
+									repeatitems : false,
+									id : "id"
+								},
+								pager : '#pager',
+								rowNum : 10,
+								rowList : [ 10, 20, 30 ],
+								sortname : 'id',
+								sortorder : 'asc',
+								viewrecords : true,
+								gridview : true,
+								height : 250,
+								width : 750,
+								caption : 'Books',
+								onSelectRow : function(id) {
+									document.location.href = "/springproj05/books/" + id;
+								}
+							});
+				});
+	</script>
+	<c:if test="${not empty message}">
+		<div id="message" class="${message.type}">${message.message}</div>
+	</c:if>
+
+		<h2>${bookListing}</h2>
+	
+		<div>
+			<table id="book-list">
+			<tr><td></td>
+			</tr>
+			</table>
+		</div>
+		<div id="pager"></div>
+	
+</div>

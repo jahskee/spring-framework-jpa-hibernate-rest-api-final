@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:joda="http://www.joda.org/joda/time/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:message code="update_book_information"
+		var="updateBookInformation" />
+	<spring:message code="add_book" var="addBook" />
+	<spring:message code="id" var="id" />
+	<spring:message code="category_name" var="categoryName" />
+	<spring:message code="isbn" var="isbn" />
+	<spring:message code="title" var="title" />
+	<spring:message code="publisher" var="publisher" />
+	<spring:message code="price" var="price" />
+	<spring:message code="save" var="save" />
+	<spring:message code="reset" var="reset" />
+
+
+	<div class="form-book ui-widget ui-widget-content">
+
+		<c:if test="${empty formNotify.formAdd}">
+			<h2>${updateBookInformation}</h2>
+		</c:if>
+		<c:if test="${not empty formNotify.formAdd}">
+			<h2>${addBook}</h2>
+		</c:if>
+
+
+		<form:form modelAttribute="book" id="bookUpdateForm" method="post" class="edit-form">
+
+			<c:if test="${not empty message}">
+				<div id="message" class="${message.type}">${message.message}</div>
+			</c:if>
+
+			<c:if test="${empty formNotify.formAdd}">
+				<form:label path="id">${id} (read-only)</form:label>
+				<form:input path="id" readonly="true" />
+				<div>
+					<form:errors path="id" cssClass="error" />
+				</div>
+				<p />
+			</c:if>
+
+			<form:label path="title">${title}*<br />
+			</form:label>
+			<form:textarea cols="45" rows="2" path="title" id="title" />
+			<div style="display: inline-block;">
+				<form:errors path="title" cssClass="error" />
+			</div>
+			<p />
+
+			<form:label path="categoryName">${categoryName}*</form:label>
+			<form:input path="categoryName" style="width:250px;" />
+			<div>
+				<form:errors path="categoryName" cssClass="error" />
+			</div>
+			<p />
+
+			<form:label path="isbn">${isbn}*</form:label>
+			<form:input path="isbn" id="isbn" />
+			<div>
+				<form:errors path="isbn" cssClass="error" />
+			</div>
+			<p />
+
+			<form:label path="publisher">${publisher}*</form:label>
+			<form:input path="publisher" id="publisher" />
+			<div>
+				<form:errors path="publisher" cssClass="error" />
+			</div>
+			<p />
+
+			<form:label path="price">${price}* (USD)</form:label>
+			<form:input type="number" path="price" id="price" />
+			<div>
+				<form:errors path="price" cssClass="error" />
+			</div>
+			<p />
+
+			<button type="submit"
+				class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-button-text">${save}</span>
+			</button>
+
+			<button type="reset"
+				class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+				<span class="ui-button-text">${reset}</span>
+			</button>
+		</form:form>
+
+	</div>
+
+</div>

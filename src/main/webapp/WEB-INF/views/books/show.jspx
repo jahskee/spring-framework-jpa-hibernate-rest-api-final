@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:joda="http://www.joda.org/joda/time/tags" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<spring:message code="book_information" var="bookInformation"/>
+	<spring:message code="id" var="id"/>
+	<spring:message code="category_name" var="categoryName"/>
+	<spring:message code="isbn" var="isbn"/>
+	<spring:message code="title" var="title"/>
+	<spring:message code="publisher" var="publisher"/>
+	<spring:message code="price" var="price"/>
+	<spring:message code="edit_book" var="editBook" />
+
+	<div class="book-show">
+	
+			<h2>${bookInformation}</h2>
+			<c:if test="${not empty book}">
+			
+			<c:if test="${not empty message}">
+					<div id="message" class="${message.type}">${message.message}</div>
+			</c:if>
+	
+			<table cellspacing="0" cellpadding="0" border="1" class="table-styled ui-widget ui-widget-content">
+				<tr>
+					<td><strong>${id}</strong></td>
+					<td>${book.id}</td>
+				</tr>
+				<tr>
+					<td><strong>${title}</strong></td>
+					<td>${book.title}</td>
+				</tr>
+				<tr>
+					<td><strong>${categoryName}</strong></td>
+					<td>${book.categoryName}</td>
+				</tr>
+				<tr>
+					<td><strong>${isbn}</strong></td>
+					<td>${book.isbn}</td>
+				</tr>
+				<tr>
+					<td><strong>${publisher}</strong></td>
+					<td>${book.publisher}</td>
+				</tr>
+				<tr>
+					<td><strong>${price}</strong></td>
+					<td>$${book.price}</td>
+				</tr>
+			</table>
+			<sec:authorize access="hasRole('ROLE_USER')">
+				<p>
+					<a href="?form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">${editBook}</a>
+				</p>
+			</sec:authorize>
+		</c:if>
+	</div>	
+	
+</div>
